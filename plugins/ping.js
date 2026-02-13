@@ -1,39 +1,45 @@
-import { checkReg } from '../lib/checkReg.js'
+export const commands = {
+    menu: async (sock, message, args, config, sender, isGroup) => {
+        const chat = message.key.remoteJid;
+        
+        const menuText = `╭━━❰ *${config.botName}* ❱━━
+┃
+┃ 📍 *Información*
+┃ 👤 Creador: ${config.creatorNumber}
+┃ 🤖 Bot: ${config.botNumber}
+┃
+┃ 📋 *Comandos*
+┃ ${config.prefix}menu - Muestra este menú
+┃ ${config.prefix}info - Información del bot
+┃ ${config.prefix}ping - Estado del bot
+┃
+╰━━━━━━━━━━━━━━`;
 
-let handler = async (m, { conn, user, isOwner }) => {
-  // Verificar registro (opcional, depende del comando)
-  // if (await checkReg(m, user)) return
-  
-  try {
-    await m.react('⚙️')
+        await sock.sendMessage(chat, { text: menuText });
+    },
     
-    // Ping simulado
-    const ping = 150
-    const speed = ping < 200 ? '⚡ Rápido' : ping < 500 ? '⏱️ Normal' : '🐢 Lento'
-    
-    // Uptime
-    const uptime = process.uptime()
-    const horas = Math.floor(uptime / 3600)
-    const minutos = Math.floor((uptime % 3600) / 60)
-    const segundos = Math.floor(uptime % 60)
-    
-    let tiempo = ''
-    if (horas > 0) tiempo += `${horas}h `
-    if (minutos > 0) tiempo += `${minutos}m `
-    tiempo += `${segundos}s`
-    
-    const txt = `> ⚡ *Ping:* ${ping}ms\n> 📊 *Speed:* ${speed}\n> ⏰ *Activo:* ${tiempo}`
-    
-    await conn.sendMessage(m.chat, { text: txt }, { quoted: m })
-    await m.react('✅')
-    
-  } catch (error) {
-    await m.react('❌')
-  }
-}
+    info: async (sock, message, args, config, sender, isGroup) => {
+        const chat = message.key.remoteJid;
+        
+        const infoText = `🤖 *${config.botName}*
+        
+📱 *Bot:* ${config.botNumber}
+👤 *Creador:* ${config.creatorNumber}
+⚡ *Estado:* Activo
+🔰 *Prefijo:* ${config.prefix}`;
 
-handler.command = ['ping', 'p', 'latencia']
-handler.tags = ['main']
-handler.exp = 10
-
-export default handler
+        await sock.sendMessage(chat, { text: infoText });
+    },
+    
+    ping: async (sock, message, args, config, sender, isGroup) => {
+        const chat = message.key.remoteJid;
+        const start = Date.now();
+        
+        await sock.sendMessage(chat, { text: '🏓 Calculando ping...' });
+        
+        const end = Date.now();
+        const ping = end - start;
+        
+        await sock.sendMessage(chat, { text: `📶 *Ping:* ${ping}ms` });
+    }
+};

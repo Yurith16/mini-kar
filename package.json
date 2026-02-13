@@ -1,17 +1,15 @@
 {
-  "name": "mini-kar",
-  "version": "1.0.0",
   "type": "module",
+  "name": "bot-whatsapp",
+  "version": "1.0.0",
+  "description": "Bot de WhatsApp con Baileys",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.0",
+    "@whiskeysockets/baileys": "^6.5.0",
     "qrcode-terminal": "^0.12.0",
-    "pino": "^8.4.0",
-    "lowdb": "^3.0.0",
-    "axios": "^1.13.5",
-    "cfonts": "^3.3.0"
+    "pino": "^8.17.2"
   }
 }
