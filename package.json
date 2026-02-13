@@ -1,0 +1,22 @@
+{
+  "name": "karbot-mini",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "pino": "^8.16.0",
+    "qrcode-terminal": "^0.12.0",
+    "lowdb": "^3.0.0",
+    "yt-search": "^2.10.3",
+    "moment-timezone": "^0.5.43",
+    "node-fetch": "^3.3.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "ffmpeg-static": "^5.2.0"
+  }
+}
